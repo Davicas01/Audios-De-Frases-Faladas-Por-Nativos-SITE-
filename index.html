@@ -3,198 +3,551 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Áudio de Pronúncia Simplificada para aprender inglês rapidamente, com pronúncias corretas e exemplos práticos">
+    <meta name="keywords" content="inglês, pronúncia, áudio, aprendizado, idiomas">
     <title>🎧 Áudio de Pronúncia Simplificada</title>
     <link rel="stylesheet" href="bonus1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Preconnect para carregamento mais rápido de fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Favicon básico -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎧</text></svg>">
 </head>
 <body>
     <header>
         <h1>🎧 Áudio de Pronúncia Simplificada</h1>
-        <p>Aprenda rápido e fale sem sotaque errado!</p>
+        <p>Aprenda rápido e fale inglês sem sotaque errado!</p>
+        <div class="keyboard-shortcuts">
+            <button id="show-shortcuts" aria-label="Mostrar atalhos de teclado">
+                <i class="fas fa-keyboard"></i> Atalhos de teclado
+            </button>
+            <div id="shortcuts-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h3>Atalhos de Teclado</h3>
+                    <ul class="shortcuts-list">
+                        <li><kbd>Alt</kbd> + <kbd>S</kbd> - Focar na caixa de busca</li>
+                        <li><kbd>Alt</kbd> + <kbd>T</kbd> - Voltar ao topo da página</li>
+                        <li><kbd>Tab</kbd> - Navegar entre elementos</li>
+                        <li><kbd>Espaço</kbd> - Iniciar/Pausar áudio quando focado</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </header>
     <main>
         <section>
             <h2>Frases e Áudios</h2>
-            <ul>
-                <li>
-                    <p><strong>Hello / Hi.</strong> <em>(Olá)</em> - Use para cumprimentar alguém de forma casual ou formal.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_hello (1).mp3" type="audio/mpeg">
+            
+            <div id="search-box">
+                <input type="text" id="search-input" placeholder="Buscar frase ou significado..." aria-label="Buscar frases">
+            </div>
+            
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="saudacao">Saudações</button>
+                <button class="filter-btn" data-filter="cortesia">Cortesia</button>
+                <button class="filter-btn" data-filter="emergencia">Emergência</button>
+                <button class="filter-btn" data-filter="cotidiano">Cotidiano</button>
+                <button class="filter-btn" data-filter="viagem">Viagem</button>
+            </div>
+            
+            <ul id="phrases-list">
+                <li data-category="saudacao">
+                    <span class="category-label">Saudação</span>
+                    <p><strong>Hello / Hi.</strong> <em>(Olá)</em></p>
+                    <p class="phrase-description">Use para cumprimentar alguém de forma casual ou formal.</p>
+                    <audio controls aria-label="Pronúncia de Hello/Hi">
+                        <source data-src="audios/pronunciation_en_hello (1).mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>Good morning.</strong> <em>(Bom dia)</em> - Ideal para cumprimentar alguém pela manhã.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_good_morning (1).mp3" type="audio/mpeg">
+                <li data-category="saudacao">
+                    <span class="category-label">Saudação</span>
+                    <p><strong>Good morning.</strong> <em>(Bom dia)</em></p>
+                    <p class="phrase-description">Ideal para cumprimentar alguém pela manhã.</p>
+                    <audio controls aria-label="Pronúncia de Good morning">
+                        <source data-src="audios/pronunciation_en_good_morning (1).mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>How are you?</strong> <em>(Como vai você?)</em> - Pergunta comum para iniciar uma conversa.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_how_are_you_.mp3" type="audio/mpeg">
+                <li data-category="saudacao">
+                    <span class="category-label">Saudação</span>
+                    <p><strong>How are you?</strong> <em>(Como vai você?)</em></p>
+                    <p class="phrase-description">Pergunta comum para iniciar uma conversa.</p>
+                    <audio controls aria-label="Pronúncia de How are you">
+                        <source data-src="audios/pronunciation_en_how_are_you_.mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>Thank you.</strong> <em>(Obrigado)</em> - Use para expressar gratidão em qualquer situação.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_thank_you.mp3" type="audio/mpeg">
+                <li data-category="cortesia">
+                    <span class="category-label">Cortesia</span>
+                    <p><strong>Thank you.</strong> <em>(Obrigado)</em></p>
+                    <p class="phrase-description">Use para expressar gratidão em qualquer situação.</p>
+                    <audio controls aria-label="Pronúncia de Thank you">
+                        <source data-src="audios/pronunciation_en_thank_you.mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>Excuse me.</strong> <em>(Com licença)</em> - Perfeito para chamar atenção educadamente ou pedir passagem.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_excuse_me.mp3" type="audio/mpeg">
+                <li data-category="cortesia">
+                    <span class="category-label">Cortesia</span>
+                    <p><strong>Excuse me.</strong> <em>(Com licença)</em></p>
+                    <p class="phrase-description">Perfeito para chamar atenção educadamente ou pedir passagem.</p>
+                    <audio controls aria-label="Pronúncia de Excuse me">
+                        <source data-src="audios/pronunciation_en_excuse_me.mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>Where is the bathroom?</strong> <em>(Onde fica o banheiro?)</em> - Frase essencial para emergências em locais públicos.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_where_is_the_bathroom_.mp3" type="audio/mpeg">
+                <li data-category="viagem">
+                    <span class="category-label">Viagem</span>
+                    <p><strong>Where is the bathroom?</strong> <em>(Onde fica o banheiro?)</em></p>
+                    <p class="phrase-description">Frase essencial para emergências em locais públicos.</p>
+                    <audio controls aria-label="Pronúncia de Where is the bathroom">
+                        <source data-src="audios/pronunciation_en_where_is_the_bathroom_.mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>I'm lost.</strong> <em>(Estou perdido.)</em> - Use para pedir ajuda ao se perder em uma cidade ou local desconhecido.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_i'm_lost.mp3" type="audio/mpeg">
+                <li data-category="viagem">
+                    <span class="category-label">Viagem</span>
+                    <p><strong>I'm lost.</strong> <em>(Estou perdido.)</em></p>
+                    <p class="phrase-description">Use para pedir ajuda ao se perder em uma cidade ou local desconhecido.</p>
+                    <audio controls aria-label="Pronúncia de I'm lost">
+                        <source data-src="audios/pronunciation_en_i'm_lost.mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>Call the police!</strong> <em>(Chame a polícia!)</em> - Frase importante para situações de emergência.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_call_the_police!.mp3" type="audio/mpeg">
+                <li data-category="emergencia">
+                    <span class="category-label">Emergência</span>
+                    <p><strong>Call the police!</strong> <em>(Chame a polícia!)</em></p>
+                    <p class="phrase-description">Frase importante para situações de emergência.</p>
+                    <audio controls aria-label="Pronúncia de Call the police">
+                        <source data-src="audios/pronunciation_en_call_the_police!.mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>Can you help me, please?</strong> <em>(Você pode me ajudar, por favor?)</em> - Útil para pedir assistência em qualquer situação.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_can_you_help_me,_please_.mp3" type="audio/mpeg">
+                <li data-category="cotidiano">
+                    <span class="category-label">Cotidiano</span>
+                    <p><strong>Can you help me, please?</strong> <em>(Você pode me ajudar, por favor?)</em></p>
+                    <p class="phrase-description">Útil para pedir assistência em qualquer situação.</p>
+                    <audio controls aria-label="Pronúncia de Can you help me, please">
+                        <source data-src="audios/pronunciation_en_can_you_help_me,_please_.mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>How much is it?</strong> <em>(Quanto custa?)</em> - Pergunta essencial para compras e negociações.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_how_much_is_it_.mp3" type="audio/mpeg">
+                <li data-category="viagem">
+                    <span class="category-label">Viagem</span>
+                    <p><strong>How much is it?</strong> <em>(Quanto custa?)</em></p>
+                    <p class="phrase-description">Pergunta essencial para compras e negociações.</p>
+                    <audio controls aria-label="Pronúncia de How much is it">
+                        <source data-src="audios/pronunciation_en_how_much_is_it_.mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>I have a reservation.</strong> <em>(Eu tenho uma reserva.)</em> - Use ao fazer check-in em hotéis ou restaurantes.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_i_have_a_reservation.mp3" type="audio/mpeg">
+                <li data-category="viagem">
+                    <span class="category-label">Viagem</span>
+                    <p><strong>I have a reservation.</strong> <em>(Eu tenho uma reserva.)</em></p>
+                    <p class="phrase-description">Use ao fazer check-in em hotéis ou restaurantes.</p>
+                    <audio controls aria-label="Pronúncia de I have a reservation">
+                        <source data-src="audios/pronunciation_en_i_have_a_reservation.mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>I'm sorry, I don't understand.</strong> <em>(Desculpe, eu não entendo.)</em> - Frase útil para pedir esclarecimentos em conversas.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_i'm_sorry,_i_don't_understand..mp3" type="audio/mpeg">
+                <li data-category="cortesia">
+                    <span class="category-label">Cortesia</span>
+                    <p><strong>I'm sorry, I don't understand.</strong> <em>(Desculpe, eu não entendo.)</em></p>
+                    <p class="phrase-description">Frase útil para pedir esclarecimentos em conversas.</p>
+                    <audio controls aria-label="Pronúncia de I'm sorry, I don't understand">
+                        <source data-src="audios/pronunciation_en_i'm_sorry,_i_don't_understand..mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>I have no idea.</strong> <em>(Eu não faço ideia.)</em> - Use para expressar que você não sabe algo.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_i_have_no_idea.mp3" type="audio/mpeg">
+                <li data-category="cotidiano">
+                    <span class="category-label">Cotidiano</span>
+                    <p><strong>I have no idea.</strong> <em>(Eu não faço ideia.)</em></p>
+                    <p class="phrase-description">Use para expressar que você não sabe algo.</p>
+                    <audio controls aria-label="Pronúncia de I have no idea">
+                        <source data-src="audios/pronunciation_en_i_have_no_idea.mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>I'll be right there!</strong> <em>(Estarei aí!)</em> - Frase para avisar que você está a caminho.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_i'll_be_right_there!.mp3" type="audio/mpeg">
+                <li data-category="cotidiano">
+                    <span class="category-label">Cotidiano</span>
+                    <p><strong>I'll be right there!</strong> <em>(Estarei aí!)</em></p>
+                    <p class="phrase-description">Frase para avisar que você está a caminho.</p>
+                    <audio controls aria-label="Pronúncia de I'll be right there">
+                        <source data-src="audios/pronunciation_en_i'll_be_right_there!.mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>I'll get it.</strong> <em>(Eu pego.)</em> - Use para se oferecer para pegar algo ou atender.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_i’ll_get_it..mp3" type="audio/mpeg">
+                <li data-category="cotidiano">
+                    <span class="category-label">Cotidiano</span>
+                    <p><strong>I'll get it.</strong> <em>(Eu pego.)</em></p>
+                    <p class="phrase-description">Use para se oferecer para pegar algo ou atender.</p>
+                    <audio controls aria-label="Pronúncia de I'll get it">
+                        <source data-src="audios/pronunciation_en_i'll_get_it..mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>I'm on my way out.</strong> <em>(Estou saindo.)</em> - Frase para informar que você está de saída.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_i'm_on_my_way_out..mp3" type="audio/mpeg">
+                <li data-category="cotidiano">
+                    <span class="category-label">Cotidiano</span>
+                    <p><strong>I'm on my way out.</strong> <em>(Estou saindo.)</em></p>
+                    <p class="phrase-description">Frase para informar que você está de saída.</p>
+                    <audio controls aria-label="Pronúncia de I'm on my way out">
+                        <source data-src="audios/pronunciation_en_i'm_on_my_way_out..mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>I'm running late.</strong> <em>(Estou atrasado.)</em> - Use para avisar que está atrasado para um compromisso.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_i'm_running_late..mp3" type="audio/mpeg">
+                <li data-category="cotidiano">
+                    <span class="category-label">Cotidiano</span>
+                    <p><strong>I'm running late.</strong> <em>(Estou atrasado.)</em></p>
+                    <p class="phrase-description">Use para avisar que está atrasado para um compromisso.</p>
+                    <audio controls aria-label="Pronúncia de I'm running late">
+                        <source data-src="audios/pronunciation_en_i'm_running_late..mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>It's been a long day and we're completely whacked.</strong> <em>(Foi um dia longo e estamos completamente exaustos.)</em> - Frase para expressar cansaço após um dia difícil.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_it's_been_a_long_day_and_we're_completely_whacked..mp3" type="audio/mpeg">
+                <li data-category="cotidiano">
+                    <span class="category-label">Cotidiano</span>
+                    <p><strong>It's been a long day and we're completely whacked.</strong> <em>(Foi um dia longo e estamos completamente exaustos.)</em></p>
+                    <p class="phrase-description">Frase para expressar cansaço após um dia difícil.</p>
+                    <audio controls aria-label="Pronúncia de It's been a long day and we're completely whacked">
+                        <source data-src="audios/pronunciation_en_it's_been_a_long_day_and_we're_completely_whacked..mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>It's up to you.</strong> <em>(Você decide.)</em> - Use para deixar a decisão nas mãos de outra pessoa.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_it's_up_to_you..mp3" type="audio/mpeg">
+                <li data-category="cotidiano">
+                    <span class="category-label">Cotidiano</span>
+                    <p><strong>It's up to you.</strong> <em>(Você decide.)</em></p>
+                    <p class="phrase-description">Use para deixar a decisão nas mãos de outra pessoa.</p>
+                    <audio controls aria-label="Pronúncia de It's up to you">
+                        <source data-src="audios/pronunciation_en_it's_up_to_you..mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>Let me know if you have changed your plans.</strong> <em>(Me avise se você mudou seus planos.)</em> - Frase para confirmar mudanças de planos.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_let_me_know_if_you_have_changed_your_plans..mp3" type="audio/mpeg">
+                <li data-category="cortesia">
+                    <span class="category-label">Cortesia</span>
+                    <p><strong>Let me know if you have changed your plans.</strong> <em>(Me avise se você mudou seus planos.)</em></p>
+                    <p class="phrase-description">Frase para confirmar mudanças de planos.</p>
+                    <audio controls aria-label="Pronúncia de Let me know if you have changed your plans">
+                        <source data-src="audios/pronunciation_en_let_me_know_if_you_have_changed_your_plans..mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>Let's call it a day.</strong> <em>(Vamos encerrar por hoje.)</em> - Use para sugerir encerrar atividades do dia.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_let's_call_it_a_day..mp3" type="audio/mpeg">
+                <li data-category="cotidiano">
+                    <span class="category-label">Cotidiano</span>
+                    <p><strong>Let's call it a day.</strong> <em>(Vamos encerrar por hoje.)</em></p>
+                    <p class="phrase-description">Use para sugerir encerrar atividades do dia.</p>
+                    <audio controls aria-label="Pronúncia de Let's call it a day">
+                        <source data-src="audios/pronunciation_en_let's_call_it_a_day..mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>No worries.</strong> <em>(Sem problemas.)</em> - Frase para tranquilizar alguém ou minimizar um problema.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_no_worries.mp3" type="audio/mpeg">
+                <li data-category="cortesia">
+                    <span class="category-label">Cortesia</span>
+                    <p><strong>No worries.</strong> <em>(Sem problemas.)</em></p>
+                    <p class="phrase-description">Frase para tranquilizar alguém ou minimizar um problema.</p>
+                    <audio controls aria-label="Pronúncia de No worries">
+                        <source data-src="audios/pronunciation_en_no_worries.mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>Sounds like a plan.</strong> <em>(Parece um bom plano.)</em> - Use para concordar com uma sugestão ou ideia.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_sounds_like_a_plan..mp3" type="audio/mpeg">
+                <li data-category="cotidiano">
+                    <span class="category-label">Cotidiano</span>
+                    <p><strong>Sounds like a plan.</strong> <em>(Parece um bom plano.)</em></p>
+                    <p class="phrase-description">Use para concordar com uma sugestão ou ideia.</p>
+                    <audio controls aria-label="Pronúncia de Sounds like a plan">
+                        <source data-src="audios/pronunciation_en_sounds_like_a_plan..mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>Take care.</strong> <em>(Cuide-se.)</em> - Frase comum para se despedir de alguém com carinho.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_take_care..mp3" type="audio/mpeg">
+                <li data-category="cortesia">
+                    <span class="category-label">Cortesia</span>
+                    <p><strong>Take care.</strong> <em>(Cuide-se.)</em></p>
+                    <p class="phrase-description">Frase comum para se despedir de alguém com carinho.</p>
+                    <audio controls aria-label="Pronúncia de Take care">
+                        <source data-src="audios/pronunciation_en_take_care..mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
-                <li>
-                    <p><strong>Yo, what's going on?</strong> <em>(E aí, o que está acontecendo?)</em> - Saudação casual para amigos ou conhecidos.</p>
-                    <audio controls>
-                        <source src="pronunciation_en_yo,_what's_going_on_.mp3" type="audio/mpeg">
+                <li data-category="saudacao">
+                    <span class="category-label">Saudação</span>
+                    <p><strong>Yo, what's going on?</strong> <em>(E aí, o que está acontecendo?)</em></p>
+                    <p class="phrase-description">Saudação casual para amigos ou conhecidos.</p>
+                    <audio controls aria-label="Pronúncia de Yo, what's going on">
+                        <source data-src="audios/pronunciation_en_yo,_what's_going_on_.mp3" type="audio/mpeg">
                         Seu navegador não suporta o elemento de áudio.
                     </audio>
                 </li>
             </ul>
         </section>
     </main>
+    
+    <a href="#" class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
     <footer>
-        <p>© 2025 - Áudio de Pronúncia Simplificada</p>
+        <p>© 2025 - Áudio de Pronúncia Simplificada | Desenvolvido para aprendizado rápido</p>
     </footer>
+    
+    <script>
+        // Busca e filtragem
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filtro por categoria
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const phraseItems = document.querySelectorAll('#phrases-list li');
+            const searchInput = document.getElementById('search-input');
+            const backToTopButton = document.getElementById('backToTop');
+            const shortcutsButton = document.getElementById('show-shortcuts');
+            const shortcutsModal = document.getElementById('shortcuts-modal');
+            const closeModalButton = document.querySelector('.close-modal');
+            
+            // Gerenciar modal de atalhos
+            shortcutsButton.addEventListener('click', function() {
+                shortcutsModal.classList.add('active');
+                // Acessibilidade: focar o modal para leitores de tela
+                document.querySelector('.modal-content').setAttribute('tabindex', '-1');
+                document.querySelector('.modal-content').focus();
+            });
+            
+            closeModalButton.addEventListener('click', function() {
+                shortcutsModal.classList.remove('active');
+            });
+            
+            // Fechar modal clicando fora
+            window.addEventListener('click', function(e) {
+                if (e.target === shortcutsModal) {
+                    shortcutsModal.classList.remove('active');
+                }
+            });
+            
+            // Fechar modal com tecla ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && shortcutsModal.classList.contains('active')) {
+                    shortcutsModal.classList.remove('active');
+                }
+            });
+            
+            // Melhorando acessibilidade da busca
+            searchInput.setAttribute('aria-label', 'Buscar frases');
+            
+            // Aplicar filtro
+            function applyFilter(filterValue) {
+                let visibleItems = 0;
+                
+                phraseItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'flex';
+                        visibleItems++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Exibir mensagem se nenhum item for encontrado
+                const noResultsMessage = document.getElementById('no-results');
+                if (visibleItems === 0 && !noResultsMessage) {
+                    const message = document.createElement('p');
+                    message.id = 'no-results';
+                    message.textContent = 'Nenhuma frase encontrada. Tente outro termo.';
+                    message.style.textAlign = 'center';
+                    document.querySelector('section').appendChild(message);
+                } else if (visibleItems > 0 && noResultsMessage) {
+                    noResultsMessage.remove();
+                }
+            }
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Ativa o botão selecionado
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filtra os itens
+                    applyFilter(filterValue);
+                });
+            });
+            
+            // Busca por texto com debounce para melhor performance
+            let searchTimeout;
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                const searchText = this.value.toLowerCase();
+                
+                searchTimeout = setTimeout(() => {
+                    phraseItems.forEach(item => {
+                        const itemText = item.textContent.toLowerCase();
+                        
+                        if (itemText.includes(searchText)) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    // Reseta o filtro por categoria quando pesquisa
+                    if (searchText) {
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        filterButtons[0].classList.add('active');
+                    }
+                    
+                    // Verificar se existem resultados
+                    const visibleItems = document.querySelectorAll('#phrases-list li[style="display: flex;"]');
+                    const noResultsMessage = document.getElementById('no-results');
+                    
+                    if (visibleItems.length === 0 && !noResultsMessage) {
+                        const message = document.createElement('p');
+                        message.id = 'no-results';
+                        message.textContent = 'Nenhuma frase encontrada. Tente outro termo.';
+                        message.style.textAlign = 'center';
+                        document.querySelector('section').appendChild(message);
+                    } else if (visibleItems.length > 0 && noResultsMessage) {
+                        noResultsMessage.remove();
+                    }
+                }, 300); // Debounce de 300ms para performance
+            });
+            
+            // Botão voltar ao topo com throttle para performance
+            let scrollThrottleTimer;
+            window.addEventListener('scroll', function() {
+                if (!scrollThrottleTimer) {
+                    scrollThrottleTimer = setTimeout(() => {
+                        if (window.pageYOffset > 300) {
+                            backToTopButton.classList.add('visible');
+                        } else {
+                            backToTopButton.classList.remove('visible');
+                        }
+                        scrollThrottleTimer = null;
+                    }, 100);
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Adiciona funcionalidade de repetição para cada áudio
+            const audioElements = document.querySelectorAll('audio');
+            
+            audioElements.forEach(audio => {
+                // Cria um botão de repetição para cada áudio
+                const repeatButton = document.createElement('button');
+                repeatButton.innerHTML = '<i class="fas fa-redo"></i> Repetir 3x';
+                repeatButton.className = 'repeat-btn';
+                repeatButton.setAttribute('aria-label', 'Repetir áudio três vezes');
+                
+                audio.parentNode.insertBefore(repeatButton, audio.nextSibling);
+                
+                repeatButton.addEventListener('click', function() {
+                    // Desativar todos os outros áudios quando um é tocado
+                    audioElements.forEach(a => {
+                        if (a !== audio) {
+                            a.pause();
+                            a.currentTime = 0;
+                        }
+                    });
+                    
+                    let playCount = 0;
+                    audio.currentTime = 0;
+                    audio.play();
+                    
+                    // Feedback visual durante a reprodução
+                    repeatButton.classList.add('playing');
+                    repeatButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Reproduzindo...';
+                    
+                    const playNextIteration = function() {
+                        playCount++;
+                        if (playCount < 3) {
+                            audio.currentTime = 0;
+                            audio.play();
+                        } else {
+                            // Restaurar texto original após as 3 reproduções
+                            repeatButton.classList.remove('playing');
+                            repeatButton.innerHTML = '<i class="fas fa-redo"></i> Repetir 3x';
+                        }
+                    };
+                    
+                    const onEnded = function() {
+                        playNextIteration();
+                        
+                        // Remove o evento após a terceira reprodução
+                        if (playCount >= 3) {
+                            audio.removeEventListener('ended', onEnded);
+                        }
+                    };
+                    
+                    // Limpa qualquer listener anterior para evitar loops infinitos
+                    audio.removeEventListener('ended', onEnded);
+                    audio.addEventListener('ended', onEnded);
+                });
+            });
+            
+            // Implementa teclas de atalho para acessibilidade
+            document.addEventListener('keydown', function(e) {
+                // Alt+S para focar na busca
+                if (e.altKey && e.key === 's') {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+                
+                // Alt+T para voltar ao topo
+                if (e.altKey && e.key === 't') {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Alt+K para abrir modal de atalhos
+                if (e.altKey && e.key === 'k') {
+                    e.preventDefault();
+                    shortcutsModal.classList.add('active');
+                }
+            });
+            
+            // Lazy loading para áudios
+            if ('IntersectionObserver' in window) {
+                const audioObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const audio = entry.target;
+                            const source = audio.querySelector('source');
+                            if (source.dataset.src) {
+                                source.src = source.dataset.src;
+                                audio.load();
+                                observer.unobserve(audio);
+                            }
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('audio').forEach(audio => {
+                    audioObserver.observe(audio);
+                });
+            }
+            
+            // Para cada áudio, adicionar a capacidade de controlar com espaço quando focado
+            audioElements.forEach(audio => {
+                audio.addEventListener('keydown', function(e) {
+                    if (e.code === 'Space') {
+                        e.preventDefault();
+                        if (audio.paused) {
+                            audio.play();
+                        } else {
+                            audio.pause();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
